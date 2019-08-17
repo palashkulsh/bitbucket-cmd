@@ -13,7 +13,7 @@
     "openurl": "^1.1.0",
     "rc": "^1.2.1",
     "request": "^2.76.0",
-    "requirejs": "~2.1.5",
+    "requirejs": "~2.3.6",
     "simple-git": "1.73.0",
     "superagent": "~0.13.0"
   },
