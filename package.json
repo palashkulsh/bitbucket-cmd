@@ -8,7 +8,7 @@
     "cheerio": "^0.22.0",
     "cli-table": "~0.2.0",
     "colors": "^1.1.2",
-    "commander": "~1.1.1",
+    "commander": "~3.0.2",
     "moment": "^2.10.2",
     "openurl": "^1.1.0",
     "rc": "^1.2.1",
