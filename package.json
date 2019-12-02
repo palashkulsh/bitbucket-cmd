@@ -15,7 +15,7 @@
     "request": "^2.76.0",
     "requirejs": "~2.1.5",
     "simple-git": "1.73.0",
-    "superagent": "~0.13.0"
+    "superagent": "~5.1.2"
   },
   "name": "cmd-bitbucket",
   "description": "[bitbucket-cmd](https://www.npmjs.com/package/bitbucket-cmd) ========",
