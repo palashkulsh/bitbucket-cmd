@@ -69,11 +69,11 @@ The tool automatically extracts workspace, repository, and PR number from these 
 ### Diffstat with URL
 ```bash
 # View statistics for any PR from any directory
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/248" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/248" --diffstat
 
 # Output:
-# Extracted from URL: workspace=paytmteam, repo=market-order-subscription, PR=248
-# https://api.bitbucket.org/2.0/repositories/paytmteam/market-order-subscription/pullrequests/248/diffstat
+# Extracted from URL: workspace=your-workspace, repo=your-repo, PR=248
+# https://api.bitbucket.org/2.0/repositories/your-workspace/your-repo/pullrequests/248/diffstat
 # Getting diffstat for PR 248
 # Diffstat for PR 248
 # ╔════════════╤═════════════╤═══════════════╤══════════╗
@@ -88,11 +88,11 @@ bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-
 ### Diff with URL
 ```bash
 # View full diff for any PR from any directory
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244" -d
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/244" -d
 
 # Output:
-# Extracted from URL: workspace=paytmteam, repo=market-order-subscription, PR=244
-# https://api.bitbucket.org/2.0/repositories/paytmteam/market-order-subscription/pullrequests/244/diff
+# Extracted from URL: workspace=your-workspace, repo=your-repo, PR=244
+# https://api.bitbucket.org/2.0/repositories/your-workspace/your-repo/pullrequests/244/diff
 # Diffing PR 244
 # Diff PR  diff --git a/api/cancel.js b/api/cancel.js
 # index 974f508..ddf11e2 100644
@@ -104,8 +104,8 @@ bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-
 ### Using URL with /diff or /diffstat in path
 ```bash
 # The tool recognizes the URL path and automatically applies the command
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/248/diff" -d
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/248/diffstat" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/248/diff" -d
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/248/diffstat" --diffstat
 ```
 
 ## Comparison: Traditional vs URL-Based
@@ -113,7 +113,7 @@ bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-
 ### Traditional Method (requires navigation)
 ```bash
 # Must be in the repository directory
-cd /path/to/market-order-subscription
+cd /path/to/your-repo
 bitbucket pr --diffstat 248
 ```
 
@@ -121,7 +121,7 @@ bitbucket pr --diffstat 248
 ```bash
 # Can be in any directory
 cd /anywhere
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/248" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/248" --diffstat
 ```
 
 ## Benefits
@@ -183,7 +183,7 @@ bitbucket pr -d 244
 # Reviewer receives PR URL in Slack
 # Can run from ANY directory - even /tmp!
 cd /tmp
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-payment/pull-requests/156" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/backend-service/pull-requests/156" --diffstat
 ```
 
 ### Example 2: Comparing Multiple PRs (No Directory Switching!)
@@ -191,9 +191,9 @@ bitbucket pr -u "https://bitbucket.org/paytmteam/market-payment/pull-requests/15
 # Check statistics for multiple PRs without ANY directory navigation
 # Works from your home directory, /tmp, or anywhere!
 cd ~
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/248" --diffstat
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-payment/pull-requests/156" --diffstat
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-cart/pull-requests/89" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/api-service/pull-requests/248" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/frontend-app/pull-requests/156" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/mobile-app/pull-requests/89" --diffstat
 ```
 
 ### Example 3: Scripting PR Statistics (From Anywhere!)
@@ -201,8 +201,8 @@ bitbucket pr -u "https://bitbucket.org/paytmteam/market-cart/pull-requests/89" -
 #!/bin/bash
 # Script to check multiple PRs - runs from ANY directory!
 PR_URLS=(
-  "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/248"
-  "https://bitbucket.org/paytmteam/market-payment/pull-requests/156"
+  "https://bitbucket.org/your-workspace/api-service/pull-requests/248"
+  "https://bitbucket.org/your-workspace/frontend-app/pull-requests/156"
 )
 
 for url in "${PR_URLS[@]}"; do
@@ -217,8 +217,8 @@ done
 # Review PRs from repositories you've never cloned or configured
 # Only requires bitbucket-cmd to be configured once (in any repo)
 cd /tmp
-bitbucket pr -u "https://bitbucket.org/paytmteam/some-new-repo/pull-requests/1" --diffstat
-# Works immediately! No need to clone or configure some-new-repo
+bitbucket pr -u "https://bitbucket.org/your-workspace/new-project/pull-requests/1" --diffstat
+# Works immediately! No need to clone or configure new-project
 ```
 
 ## Error Handling
@@ -243,8 +243,8 @@ bitbucket pr --diffstat
 
 ### URL Parsing
 The tool uses regular expressions to extract:
-- Workspace name (e.g., `paytmteam`)
-- Repository slug (e.g., `market-order-subscription`)
+- Workspace name (e.g., `your-workspace`)
+- Repository slug (e.g., `your-repo`)
 - PR number (e.g., `248`)
 
 ### Override Behavior

@@ -31,14 +31,14 @@ bitbucket pr -u "https://bitbucket.org/workspace/repo/pull-requests/123/diff" -d
 
 ### Example with PR Number
 ```bash
-cd market-order-subscription
+cd your-repo
 node ../bitbucket-cmd/bin/bitbucket.js pr --diffstat 244
 ```
 
 ### Example with URL
 ```bash
 # Works from any directory - extracts workspace, repo, and PR number from URL
-node ../bitbucket-cmd/bin/bitbucket.js pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244" --diffstat
+node ../bitbucket-cmd/bin/bitbucket.js pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/244" --diffstat
 ```
 
 ### Output
@@ -103,16 +103,16 @@ Both commands now support:
 
 ```bash
 # Traditional way (requires being in repo directory)
-cd market-order-subscription
+cd your-repo
 bitbucket pr --diffstat 244
 
 # New way with URL (works from anywhere)
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/244" --diffstat
 
 # Can use with diff too
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244" -d
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/244" -d
 
 # Works even from different repo directories
-cd market-payment
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244" --diffstat
+cd other-repo
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/244" --diffstat
 ```

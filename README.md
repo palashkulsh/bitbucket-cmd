@@ -124,30 +124,30 @@ Please note that the "reviewers" section is added to the config file.  I've adde
 "default": {
     "auth": {
       "url": "https://api.bitbucket.org/2.0/repositories/",
-      "user": "palash-paytm",
-      "token": "palash-paytm:CLIENT_SECRET_KEY_YOU_ENTERED",
-      "team": "paytmteam",
+      "user": "john-doe",
+      "token": "john-doe:CLIENT_SECRET_KEY_YOU_ENTERED",
+      "team": "your-workspace",
       "repo_name": "repo-name"
     },
     "reviewers": [
       		   {
-		    "username": "rohit-prajapati-paytm"
+		    "username": "jane-smith"
 		   }
       ]
   },
   "repo_level": {
-    "/home/palashkulshreshtha/Documents/programs/mygit/repo-name": {
+    "/home/username/Documents/programs/repo-name": {
       "reviewers": [
       		   {
-		    "username": "rohit-prajapati-paytm"
+		    "username": "jane-smith"
 		   }
       ],
       "auth": {
         "url": "https://api.bitbucket.org/2.0/repositories/",
-        "user": "palash-paytm",
-        "token": "palash-paytm:CLIENT_SECRET_KEY_YOU_ENTERED",
-        "team": "paytmteam",
-        "repo_name": "merchant-payout"
+        "user": "john-doe",
+        "token": "john-doe:CLIENT_SECRET_KEY_YOU_ENTERED",
+        "team": "your-workspace",
+        "repo_name": "your-service"
       }
     }
   }
@@ -160,22 +160,22 @@ or an empty options section like this:
 "default": {
     "auth": {
       "url": "https://api.bitbucket.org/2.0/repositories/",
-      "user": "palash-paytm",
-      "token": "palash-paytm:CLIENT_SECRET_KEY_YOU_ENTERED",
-      "team": "paytmteam",
+      "user": "john-doe",
+      "token": "john-doe:CLIENT_SECRET_KEY_YOU_ENTERED",
+      "team": "your-workspace",
       "repo_name": "repo-name"
     },
     "reviewers": []
   },
   "repo_level": {
-    "/home/palashkulshreshtha/Documents/programs/mygit/repo-name": {
+    "/home/username/Documents/programs/repo-name": {
       "reviewers": [],
       "auth": {
         "url": "https://api.bitbucket.org/2.0/repositories/",
-        "user": "palash-paytm",
-        "token": "palash-paytm:CLIENT_SECRET_KEY_YOU_ENTERED",
-        "team": "paytmteam",
-        "repo_name": "merchant-payout"
+        "user": "john-doe",
+        "token": "john-doe:CLIENT_SECRET_KEY_YOU_ENTERED",
+        "team": "your-workspace",
+        "repo_name": "your-service"
       }
     }
   }
@@ -188,35 +188,35 @@ or a list of reviewers like this:
 "default": {
     "auth": {
       "url": "https://api.bitbucket.org/2.0/repositories/",
-      "user": "palash-paytm",
-      "token": "palash-paytm:CLIENT_SECRET_KEY_YOU_ENTERED",
-      "team": "paytmteam",
+      "user": "john-doe",
+      "token": "john-doe:CLIENT_SECRET_KEY_YOU_ENTERED",
+      "team": "your-workspace",
       "repo_name": "repo-name"
     },
     "reviewers": [
       		   {
-		    "username": "rohit-prajapati-paytm"
+		    "username": "jane-smith"
 		   },
 		   {
-		    "username": "dheerajbatra-paytm"
+		    "username": "bob-jones"
 		   }
       ]
   },
   "repo_level": {
-    "/home/palashkulshreshtha/Documents/programs/mygit/repo-name": {
+    "/home/username/Documents/programs/repo-name": {
       "reviewers": [
       		   {
-		    "username": "rohit-prajapati-paytm"
+		    "username": "jane-smith"
 		   },{
-		    "username": "dheerajbatra-paytm"
+		    "username": "bob-jones"
 		   }
       ],
       "auth": {
         "url": "https://api.bitbucket.org/2.0/repositories/",
-        "user": "palash-paytm",
-        "token": "palash-paytm:CLIENT_SECRET_KEY_YOU_ENTERED",
-        "team": "paytmteam",
-        "repo_name": "merchant-payout"
+        "user": "john-doe",
+        "token": "john-doe:CLIENT_SECRET_KEY_YOU_ENTERED",
+        "team": "your-workspace",
+        "repo_name": "your-service"
       }
     }
   }
@@ -275,9 +275,9 @@ bitbucket pr -l
 
 The above command will output something like this:
 ```
- ID  Author              Source                   Destination  Title                                              State  Reviewers                           Url                                                               
+ ID  Author         Source       Destination  Title                                              State  Reviewers  Url                                                               
 
- 8   palash-paytm        test_branch              master       MC trimming before checking for approval           OPEN                                       https://bitbucket.org/teamname/repo-name/pull-requests/8 
+ 8   john-doe       test_branch  master       MC trimming before checking for approval           OPEN              https://bitbucket.org/teamname/repo-name/pull-requests/8 
                
 ```
 

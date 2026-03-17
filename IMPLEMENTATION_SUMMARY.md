@@ -39,7 +39,7 @@ Added ability to parse Bitbucket PR URLs and extract workspace, repository, and 
 ### Traditional Method (Still Works)
 ```bash
 # Must be in configured repository directory
-cd market-order-subscription
+cd your-repo
 bitbucket pr --diffstat 244
 ```
 
@@ -47,10 +47,10 @@ bitbucket pr --diffstat 244
 ```bash
 # Works from ANY directory
 cd /tmp
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/244" --diffstat
 
 # Also works with diff
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244" -d
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/244" -d
 ```
 
 ### Real-World Workflow
@@ -58,7 +58,7 @@ bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-
 # Receive PR URL in Slack or email
 # Run from wherever you are - no directory navigation!
 cd ~
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-payment/pull-requests/156" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/backend-service/pull-requests/156" --diffstat
 ```
 
 ## Files Modified
@@ -111,37 +111,37 @@ bitbucket pr -u "https://bitbucket.org/paytmteam/market-payment/pull-requests/15
 
 ✅ **From configured directory (traditional)**:
 ```bash
-cd market-order-subscription
+cd your-repo
 bitbucket pr --diffstat 244
 # ✅ Works
 ```
 
 ✅ **From different configured directory with URL**:
 ```bash
-cd market-cart
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244" --diffstat
+cd other-repo
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/244" --diffstat
 # ✅ Works
 ```
 
 ✅ **From non-configured directory (/tmp) with URL**:
 ```bash
 cd /tmp
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/244" --diffstat
 # ✅ Works!
 ```
 
 ✅ **From home directory with URL**:
 ```bash
 cd ~
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/248" -d
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/248" -d
 # ✅ Works!
 ```
 
 ✅ **Multiple different repositories from one location**:
 ```bash
 cd /tmp
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/248" --diffstat
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-payment/pull-requests/156" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/api-service/pull-requests/248" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/frontend-app/pull-requests/156" --diffstat
 # ✅ Both work!
 ```
 

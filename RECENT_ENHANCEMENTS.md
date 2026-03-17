@@ -66,7 +66,7 @@ sudo dnf install meld
 **Quick Review with Meld**:
 ```bash
 cd /tmp
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244" -d --meld
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/244" -d --meld
 ```
 
 **Compare Multiple Files**:
@@ -89,7 +89,7 @@ bitbucket pr -u "https://..." -d --meld
 ### All-in-One Review
 ```bash
 # Get stats AND open in Meld
-PR_URL="https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244"
+PR_URL="https://bitbucket.org/your-workspace/your-repo/pull-requests/244"
 
 echo "=== Checking Statistics ==="
 bitbucket pr -u "$PR_URL" --diffstat

@@ -30,26 +30,26 @@ bitbucket pr -u "https://bitbucket.org/workspace/repo/pull-requests/123" --diffs
 ### View Diffstat (File Statistics)
 ```bash
 # From configured repo (traditional)
-cd market-order-subscription
+cd your-repo
 bitbucket pr --diffstat 244
 
 # From anywhere with URL (new!)
 cd /tmp
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/244" --diffstat
 ```
 
 ### View Diff (Actual Changes)
 ```bash
 # From configured repo (traditional)
-cd market-order-subscription
+cd your-repo
 bitbucket pr -d 244
 
 # From anywhere with URL (new!)
 cd ~
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244" -d
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/244" -d
 
 # Open in Meld for visual comparison (NEW!)
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244" -d --meld
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/244" -d --meld
 ```
 
 ### Copy-Paste Workflow
@@ -66,10 +66,10 @@ bitbucket pr -u "PASTE_URL_HERE" --diffstat
 ```bash
 # Someone sends you a PR link in Slack
 # Just paste it - no need to navigate or clone!
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-payment/pull-requests/156" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/backend-service/pull-requests/156" --diffstat
 
 # Want to see the actual changes? Open in Meld!
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-payment/pull-requests/156" -d --meld
+bitbucket pr -u "https://bitbucket.org/your-workspace/backend-service/pull-requests/156" -d --meld
 ```
 
 ### Compare Multiple PRs
@@ -222,7 +222,7 @@ alias bitbucket='node /path/to/bitbucket-cmd/bin/bitbucket.js'
 ### Work from /tmp
 ```bash
 cd /tmp
-bitbucket pr -u "https://bitbucket.org/paytmteam/market-order-subscription/pull-requests/244" --diffstat
+bitbucket pr -u "https://bitbucket.org/your-workspace/your-repo/pull-requests/244" --diffstat
 # Works! Even though /tmp has nothing to do with the repo!
 ```
 
