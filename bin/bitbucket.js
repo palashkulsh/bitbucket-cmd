@@ -44,7 +44,10 @@ requirejs([
         .option('-C, --current ', 'List Pull Request for current branch')
         .option('-s, --source <branch name>', 'Source Branch from which pr should be created', String)
         .option('-t, --to <branch name>', 'Destination Branch to which pr should be merged to', String)
-        .option('-d, --diff <pr_num>', 'Diff Pull Request', String)
+        .option('-u, --url <pr_url>', 'Bitbucket PR URL (extracts workspace, repo, and PR number)', String)
+        .option('-d, --diff [pr_num]', 'Diff Pull Request (optional with -u)', String)
+        .option('--meld', 'Open diff in Meld tool (use with -d or --diff)')
+        .option('--diffstat [pr_num]', 'Get diffstat for Pull Request (optional with -u)', String)
         .option('-p, --patch <pr_num>', 'Patch Pull Request', String)
         .option('-a, --activity <pr_num>', 'Activity on Pull Request', String)
         .option('-A, --approve <pr_num>', 'Approve the  Pull Request', String)
@@ -52,52 +55,97 @@ requirejs([
         .option('-o, --open [pr_num]', 'Open Pull Request in browser with pr_num else open the pull request with current branch', String)
         .option('-O, --checkout <pr_num>', 'Checkout to PRs branch', String)
         .action(function (options) {
-            auth.setConfig(function (auth) {
-                if (auth) {
-                    if (options.list) {
-                        pr.list(options, finalCb);
+            // For URL-based operations, we don't need repo-specific config, just default auth
+            var isUrlBasedOperation = options.url && (options.diff || options.diffstat);
+            
+            if (isUrlBasedOperation) {
+                // Try to load default config for URL-based operations
+                if (auth.loadDefaultConfig()) {
+                    // Execute the URL-based commands
+                    if (options.diff || (options.url && options.diff !== false)) {
+                        if (options.url && !options.diff && options.url.indexOf('/diff') > -1) {
+                            options.diff = true;
+                        }
+                        if (options.diff) {
+                            pr.diff(options);
+                        }
                     }
-                    if (options.listall) {
-                        pr.list(options, finalCb);
+                    if (options.diffstat || (options.url && options.diffstat !== false)) {
+                        if (options.url && !options.diffstat && options.url.indexOf('/diffstat') > -1) {
+                            options.diffstat = true;
+                        }
+                        if (options.diffstat) {
+                            pr.diffstat(options);
+                        }
                     }
-                    if (options.review) {
-                        pr.list(options, finalCb);
-                    }
-                    if (options.current) {
-                        pr.getPRForCurrentBranch(options, finalCb);
-                    }
-                    if (options.global) {
-                        pr.globalList(options, finalCb);
-                    }
-                    if (options.create) {
-                        pr.create(options, finalCb);
-                    }
-                    if (options.decline) {
-                        pr.decline(options);
-                    }
-                    if (options.diff) {
-                        pr.diff(options);
-                    }
-                    if (options.patch) {
-                        pr.patch(options);
-                    }
-                    if (options.activity) {
-                        pr.activity(options);
-                    }
-                    if (options.approve) {
-                        pr.approve(options);
-                    }
-                    if (options.merge) {
-                        pr.merge(options, finalCb);
-                    }
-                    if (options.open) {
-                        pr.open(options, finalCb);
-                    }
-                    if (options.checkout) {
-                        pr.checkout(options, finalCb);
-                    }
+                } else {
+                    console.log('Error: No bitbucket configuration found. Please configure bitbucket-cmd first by running it from a configured repository or set up default configuration.');
+                    process.exit(1);
                 }
-            });
+            } else {
+                // Original behavior for non-URL operations
+                auth.setConfig(function (auth) {
+                    if (auth) {
+                        if (options.list) {
+                            pr.list(options, finalCb);
+                        }
+                        if (options.listall) {
+                            pr.list(options, finalCb);
+                        }
+                        if (options.review) {
+                            pr.list(options, finalCb);
+                        }
+                        if (options.current) {
+                            pr.getPRForCurrentBranch(options, finalCb);
+                        }
+                        if (options.global) {
+                            pr.globalList(options, finalCb);
+                        }
+                        if (options.create) {
+                            pr.create(options, finalCb);
+                        }
+                        if (options.decline) {
+                            pr.decline(options);
+                        }
+                        if (options.diff || (options.url && options.diff !== false)) {
+                            // If URL is provided without explicit diff flag, check if URL contains /diff
+                            if (options.url && !options.diff && options.url.indexOf('/diff') > -1) {
+                                options.diff = true;
+                            }
+                            if (options.diff) {
+                                pr.diff(options);
+                            }
+                        }
+                        if (options.diffstat || (options.url && options.diffstat !== false)) {
+                            // If URL is provided without explicit diffstat flag, check if URL contains /diffstat
+                            if (options.url && !options.diffstat && options.url.indexOf('/diffstat') > -1) {
+                                options.diffstat = true;
+                            }
+                            if (options.diffstat) {
+                                pr.diffstat(options);
+                            }
+                        }
+                        if (options.patch) {
+                            pr.patch(options);
+                        }
+                        if (options.activity) {
+                            pr.activity(options);
+                        }
+                        if (options.approve) {
+                            pr.approve(options);
+                        }
+                        if (options.merge) {
+                            pr.merge(options, finalCb);
+                        }
+                        if (options.open) {
+                            pr.open(options, finalCb);
+                        }
+                        if (options.checkout) {
+                            pr.checkout(options, finalCb);
+                        }
+                    }
+                });
+            }
         });
 
     program
