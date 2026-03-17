@@ -69,6 +69,16 @@ Once you hit enter after the password then you should get this message:
 
 This saves your credentials in the [home directory](https://github.com/danshumaker/cmd-bitbucket/pull/2) in a config rc `~/.bitbucketconfigrc` file.
 
+### How to get a user's uuid which you should save in ~/.bitbucketconfigrc
+ * go to https://bitbucket.org/dashboard/overview
+ * Try to find a PR of intended person
+ * open the browser inspect element portion
+ * hover on his name
+ * a request is made like https://bitbucket.org/!api/2.0/users/%7B140cc970-81cc-4rdf-8fff-571ssgas28d2%7D?fields=%2Bdepartment%2C%2Bjob_title%2C%2Blocation%2C%2Borganization%2C%2Bzoneinfo
+ * the portion between %7B (denotes "{" ) and %7D (denotes "}") is that person's uuid
+ * for eg. in this case uuid id 140cc970-81cc-4rdf-8fff-571ssgas28d2
+ * add that in .bitbucketconfigrc as { "uuid" :"{140cc970-81cc-4rdf-8fff-571ssgas28d2}" } in the reviewer's list
+
 ### Basic commands
 
 ### Creating pull request
