@@ -26,7 +26,22 @@ requirejs([
        }
        process.exit(0);
      }
-     
+
+    /**
+     * Bitbucket PR URLs may end with /diff or /diffstat. Do not use indexOf('/diff') —
+     * it matches the prefix of '/diffstat' and wrongly enables the diff command.
+     */
+    function prUrlPathNoQuery(url) {
+        if (!url) return '';
+        return url.split('?')[0].split('#')[0].replace(/\/$/, '');
+    }
+    function prUrlImpliesDiff(url) {
+        return prUrlPathNoQuery(url).endsWith('/diff');
+    }
+    function prUrlImpliesDiffstat(url) {
+        return prUrlPathNoQuery(url).endsWith('/diffstat');
+    }
+
     program
         .version('v0.3.0');
 
@@ -50,20 +65,20 @@ requirejs([
         .option('--diffstat [pr_num]', 'Get diffstat for Pull Request (optional with -u)', String)
         .option('-p, --patch <pr_num>', 'Patch Pull Request', String)
         .option('-a, --activity <pr_num>', 'Activity on Pull Request', String)
-        .option('-A, --approve <pr_num>', 'Approve the  Pull Request', String)
+        .option('-A, --approve [pr_num]', 'Approve the Pull Request (optional with -u)', String)
         .option('-D, --decline <pr_num>', 'Decline Pull Request', String)
         .option('-o, --open [pr_num]', 'Open Pull Request in browser with pr_num else open the pull request with current branch', String)
         .option('-O, --checkout <pr_num>', 'Checkout to PRs branch', String)
         .action(function (options) {
             // For URL-based operations, we don't need repo-specific config, just default auth
-            var isUrlBasedOperation = options.url && (options.diff || options.diffstat);
+            var isUrlBasedOperation = options.url && (options.diff || options.diffstat || options.approve);
             
             if (isUrlBasedOperation) {
                 // Try to load default config for URL-based operations
                 if (auth.loadDefaultConfig()) {
                     // Execute the URL-based commands
                     if (options.diff || (options.url && options.diff !== false)) {
-                        if (options.url && !options.diff && options.url.indexOf('/diff') > -1) {
+                        if (options.url && !options.diff && !options.diffstat && prUrlImpliesDiff(options.url)) {
                             options.diff = true;
                         }
                         if (options.diff) {
@@ -71,12 +86,15 @@ requirejs([
                         }
                     }
                     if (options.diffstat || (options.url && options.diffstat !== false)) {
-                        if (options.url && !options.diffstat && options.url.indexOf('/diffstat') > -1) {
+                        if (options.url && !options.diffstat && !options.diff && prUrlImpliesDiffstat(options.url)) {
                             options.diffstat = true;
                         }
                         if (options.diffstat) {
                             pr.diffstat(options);
                         }
+                    }
+                    if (options.approve) {
+                        pr.approve(options);
                     }
                 } else {
                     console.log('Error: No bitbucket configuration found. Please configure bitbucket-cmd first by running it from a configured repository or set up default configuration.');
@@ -108,8 +126,7 @@ requirejs([
                             pr.decline(options);
                         }
                         if (options.diff || (options.url && options.diff !== false)) {
-                            // If URL is provided without explicit diff flag, check if URL contains /diff
-                            if (options.url && !options.diff && options.url.indexOf('/diff') > -1) {
+                            if (options.url && !options.diff && !options.diffstat && prUrlImpliesDiff(options.url)) {
                                 options.diff = true;
                             }
                             if (options.diff) {
@@ -117,8 +134,7 @@ requirejs([
                             }
                         }
                         if (options.diffstat || (options.url && options.diffstat !== false)) {
-                            // If URL is provided without explicit diffstat flag, check if URL contains /diffstat
-                            if (options.url && !options.diffstat && options.url.indexOf('/diffstat') > -1) {
+                            if (options.url && !options.diffstat && !options.diff && prUrlImpliesDiffstat(options.url)) {
                                 options.diffstat = true;
                             }
                             if (options.diffstat) {
