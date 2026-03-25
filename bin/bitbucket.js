@@ -71,11 +71,20 @@ requirejs([
         .option('-O, --checkout <pr_num>', 'Checkout to PRs branch', String)
         .action(function (options) {
             // For URL-based operations, we don't need repo-specific config, just default auth
-            var isUrlBasedOperation = options.url && (options.diff || options.diffstat || options.approve || options.merge);
+            var hasExplicitOperation = options.diff || options.diffstat || options.approve || options.merge;
+            var isUrlBasedOperation = options.url && hasExplicitOperation;
             
-            if (isUrlBasedOperation) {
+            // If only -u is provided with no operation flag, default to diff
+            var isUrlOnly = options.url && !hasExplicitOperation;
+            
+            if (isUrlBasedOperation || isUrlOnly) {
                 // Try to load default config for URL-based operations
                 if (auth.loadDefaultConfig()) {
+                    // If URL only (no flags), default to diff
+                    if (isUrlOnly) {
+                        options.diff = true;
+                    }
+                    
                     // Execute the URL-based commands
                     if (options.diff || (options.url && options.diff !== false)) {
                         if (options.url && !options.diff && !options.diffstat && !options.approve && !options.merge && prUrlImpliesDiff(options.url)) {
