@@ -52,7 +52,7 @@ requirejs([
         .option('-L, --listall', 'List all Open Pull Requests')
         .option('-G, --global', 'List all my Open Pull Requests across all repo')
         .option('-r, --review', 'List all Open Pull Requests to be reviewed by me')
-        .option('-m, --merge [pr_num]', 'Merge Pull Request with pr_num else pull request created from current branch', String)
+        .option('-m, --merge [pr_num]', 'Merge Pull Request with pr_num else pull request created from current branch (optional with -u)', String)
         .option('-S, --merge_strategy <Strategy>', 'Merging Strategy for Pull Requests (merge_commit/squash)', String)
         .option('-M, --message <pr_num>', 'Message for merge/creating PR', String)
         .option('-c, --create ', 'Create Pull Request or update the pull request')
@@ -71,7 +71,7 @@ requirejs([
         .option('-O, --checkout <pr_num>', 'Checkout to PRs branch', String)
         .action(function (options) {
             // For URL-based operations, we don't need repo-specific config, just default auth
-            var isUrlBasedOperation = options.url && (options.diff || options.diffstat || options.approve);
+            var isUrlBasedOperation = options.url && (options.diff || options.diffstat || options.approve || options.merge);
             
             if (isUrlBasedOperation) {
                 // Try to load default config for URL-based operations
@@ -95,6 +95,9 @@ requirejs([
                     }
                     if (options.approve) {
                         pr.approve(options);
+                    }
+                    if (options.merge) {
+                        pr.merge(options, finalCb);
                     }
                 } else {
                     console.log('Error: No bitbucket configuration found. Please configure bitbucket-cmd first by running it from a configured repository or set up default configuration.');
