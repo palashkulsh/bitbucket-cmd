@@ -19,7 +19,7 @@
   },
   "name": "cmd-bitbucket",
   "description": "[bitbucket-cmd](https://www.npmjs.com/package/bitbucket-cmd) ========",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "main": "bin/bitbucket.js",
   "devDependencies": {},
   "scripts": {
