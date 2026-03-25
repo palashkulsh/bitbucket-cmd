@@ -78,7 +78,7 @@ requirejs([
                 if (auth.loadDefaultConfig()) {
                     // Execute the URL-based commands
                     if (options.diff || (options.url && options.diff !== false)) {
-                        if (options.url && !options.diff && !options.diffstat && prUrlImpliesDiff(options.url)) {
+                        if (options.url && !options.diff && !options.diffstat && !options.approve && !options.merge && prUrlImpliesDiff(options.url)) {
                             options.diff = true;
                         }
                         if (options.diff) {
@@ -86,7 +86,7 @@ requirejs([
                         }
                     }
                     if (options.diffstat || (options.url && options.diffstat !== false)) {
-                        if (options.url && !options.diffstat && !options.diff && prUrlImpliesDiffstat(options.url)) {
+                        if (options.url && !options.diffstat && !options.diff && !options.approve && !options.merge && prUrlImpliesDiffstat(options.url)) {
                             options.diffstat = true;
                         }
                         if (options.diffstat) {
@@ -129,7 +129,7 @@ requirejs([
                             pr.decline(options);
                         }
                         if (options.diff || (options.url && options.diff !== false)) {
-                            if (options.url && !options.diff && !options.diffstat && prUrlImpliesDiff(options.url)) {
+                            if (options.url && !options.diff && !options.diffstat && !options.approve && !options.merge && prUrlImpliesDiff(options.url)) {
                                 options.diff = true;
                             }
                             if (options.diff) {
@@ -137,7 +137,7 @@ requirejs([
                             }
                         }
                         if (options.diffstat || (options.url && options.diffstat !== false)) {
-                            if (options.url && !options.diffstat && !options.diff && prUrlImpliesDiffstat(options.url)) {
+                            if (options.url && !options.diffstat && !options.diff && !options.approve && !options.merge && prUrlImpliesDiffstat(options.url)) {
                                 options.diffstat = true;
                             }
                             if (options.diffstat) {
