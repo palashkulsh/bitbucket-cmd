@@ -63,6 +63,7 @@ requirejs([
         .option('-d, --diff [pr_num]', 'Diff Pull Request (optional with -u)', String)
         .option('--meld', 'Open diff in Meld tool (use with -d or --diff)')
         .option('--filter <pattern>', 'Filter diff by file path or regex pattern (use with -d or --diff)', String)
+        .option('--ignore <pattern>', 'Ignore files matching pattern (use with -d or --diff)', String)
         .option('--diffstat [pr_num]', 'Get diffstat for Pull Request (optional with -u)', String)
         .option('-p, --patch <pr_num>', 'Patch Pull Request', String)
         .option('-a, --activity <pr_num>', 'Activity on Pull Request', String)
